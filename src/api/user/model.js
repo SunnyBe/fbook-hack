@@ -29,7 +29,8 @@ const userSchema = new Schema({
   username: {
     type: String,
     lowercase: true,
-    default: null
+    default: null,
+    required: true
   },
   phoneNumber: {
     type: String,
@@ -37,12 +38,16 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female'],
+    enum: ['male', 'female', 'other'],
     required: true
   },
   dateOfBirth: {
     type: Number,
     default: 0
+  },
+  address: {
+    type: String,
+    default: ''
   },
   services: {
     facebook: String,
