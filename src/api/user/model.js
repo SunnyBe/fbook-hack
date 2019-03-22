@@ -2,7 +2,6 @@ import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import randtoken from 'rand-token'
 import mongoose, { Schema } from 'mongoose'
-import mongooseKeywords from 'mongoose-keywords'
 import { env } from '../../config'
 
 const roles = ['user', 'ngo', 'admin']
@@ -123,8 +122,6 @@ userSchema.statics = {
     })
   }
 }
-
-userSchema.plugin(mongooseKeywords, { paths: ['email', 'name', 'username', ''] })
 
 const model = mongoose.model('User', userSchema)
 
