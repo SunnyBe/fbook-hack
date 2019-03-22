@@ -1,18 +1,15 @@
 import mongoose, { Schema } from 'mongoose'
 
-const exampleEndpointSchema = new Schema({
+const ngosSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User',
-    index: true
+    required: true
   },
-  title: {
+  cacNumber: {
     type: String
   },
-  message: {
-    type: String
-  },
-  likes: {
+  isVerified: {
     type: String
   }
 }, {
@@ -23,15 +20,14 @@ const exampleEndpointSchema = new Schema({
   }
 })
 
-exampleEndpointSchema.methods = {
+ngosSchema.methods = {
   view (full) {
     const view = {
       // simple view
       id: this.id,
-      user: this.user,
-      title: this.title,
-      message: this.message,
-      likes: this.likes,
+      user: this.user.view(full),
+      cacNumber: this.cacNumber,
+      isVerified: this.isVerified,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
@@ -43,7 +39,7 @@ exampleEndpointSchema.methods = {
   }
 }
 
-const model = mongoose.model('ExampleEndpoint', exampleEndpointSchema)
+const model = mongoose.model('Ngos', ngosSchema)
 
 export const schema = model.schema
 export default model
