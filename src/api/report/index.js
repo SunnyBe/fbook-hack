@@ -7,7 +7,7 @@ import { schema } from './model'
 export Report, { schema } from './model'
 
 const router = new Router()
-const { assignedTo, title, message, category, views, isAnonymous, isPublic } = schema.tree
+const { assignedTo, title, message, category, views, isAnonymous, isPrivate, contactMethod, victim } = schema.tree
 
 /**
  * @api {post} /reports Create report
@@ -21,7 +21,7 @@ const { assignedTo, title, message, category, views, isAnonymous, isPublic } = s
  * @apiParam category Report's category.
  * @apiParam views Report's views.
  * @apiParam isAnonymous Report's isAnonymous.
- * @apiParam isPublic Report's isPublic.
+ * @apiParam isPrivate Report's isPrivate.
  * @apiSuccess {Object} report Report's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Report not found.
@@ -29,7 +29,7 @@ const { assignedTo, title, message, category, views, isAnonymous, isPublic } = s
  */
 router.post('/',
   token({ required: true }),
-  body({ assignedTo, title, message, category, views, isAnonymous, isPublic }),
+  body({ assignedTo, title, message, category, views, isAnonymous, isPrivate, contactMethod, victim }),
   create)
 
 /**
@@ -75,7 +75,7 @@ router.get('/:id',
  * @apiParam category Report's category.
  * @apiParam views Report's views.
  * @apiParam isAnonymous Report's isAnonymous.
- * @apiParam isPublic Report's isPublic.
+ * @apiParam isPrivate Report's isPrivate.
  * @apiSuccess {Object} report Report's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Report not found.
@@ -83,7 +83,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({ required: true }),
-  body({ assignedTo, title, message, category, views, isAnonymous, isPublic }),
+  body({ assignedTo, title, message, category, views, isAnonymous, isPrivate, contactMethod, victim }),
   update)
 
 /**

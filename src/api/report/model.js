@@ -7,25 +7,40 @@ const reportSchema = new Schema({
     required: true
   },
   assignedTo: {
-    type: String
+    type: String,
+    default: ''
   },
   title: {
-    type: String
+    type: String,
+    default: ''
   },
   message: {
-    type: String
+    type: String,
+    default: ''
   },
   category: {
-    type: String
+    type: String,
+    default: ''
   },
   views: {
-    type: String
+    type: String,
+    default: ''
   },
   isAnonymous: {
-    type: String
+    type: String,
+    default: ''
   },
-  isPublic: {
-    type: String
+  isPrivate: {
+    type: String,
+    default: ''
+  },
+  contactMethod: {
+    type: String,
+    default: ''
+  },
+  victim: {
+    type: String,
+    default: null
   }
 }, {
   timestamps: true,
@@ -47,7 +62,9 @@ reportSchema.methods = {
       category: this.category,
       views: this.views,
       isAnonymous: this.isAnonymous,
-      isPublic: this.isPublic,
+      isPrivate: this.isPrivate,
+      contactMethod: this.contactMethod,
+      victim: this.victim,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
