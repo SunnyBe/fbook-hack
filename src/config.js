@@ -51,7 +51,7 @@ const config = {
     ip: process.env.IP || undefined,
     port: process.env.PORT || 8080,
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/express-api-boilerplate'
+      uri: process.env.MONGODB_URI || 'mongodb://heroku_zml6w4v4:lrfu07cj57861qclnio8db4dep@ds121406.mlab.com:21406/heroku_zml6w4v4'
     }
   }
 }
