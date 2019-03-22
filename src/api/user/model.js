@@ -5,7 +5,7 @@ import mongoose, { Schema } from 'mongoose'
 import mongooseKeywords from 'mongoose-keywords'
 import { env } from '../../config'
 
-const roles = ['user', 'admin']
+const roles = ['user', 'ngo', 'admin']
 
 const userSchema = new Schema({
   email: {
@@ -24,7 +24,26 @@ const userSchema = new Schema({
   name: {
     type: String,
     index: true,
-    trim: true
+    trim: true,
+    required: true
+  },
+  username: {
+    type: String,
+    lowercase: true,
+    default: null
+  },
+  phoneNumber: {
+    type: String,
+    default: ''
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+    required: true
+  },
+  dateOfBirth: {
+    type: Number,
+    default: 0
   },
   services: {
     facebook: String,
@@ -71,10 +90,10 @@ userSchema.pre('save', function (next) {
 userSchema.methods = {
   view (full) {
     let view = {}
-    let fields = ['id', 'name', 'picture']
+    let fields = ['id', 'name', 'picture', 'gender', 'dateOfBirth']
 
     if (full) {
-      fields = [...fields, 'email', 'createdAt']
+      fields = [...fields, 'email', 'phoneNumber', 'createdAt']
     }
 
     fields.forEach((field) => { view[field] = this[field] })
@@ -105,7 +124,7 @@ userSchema.statics = {
   }
 }
 
-userSchema.plugin(mongooseKeywords, { paths: ['email', 'name'] })
+userSchema.plugin(mongooseKeywords, { paths: ['email', 'name', 'username', ''] })
 
 const model = mongoose.model('User', userSchema)
 
